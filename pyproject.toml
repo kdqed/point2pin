@@ -1,0 +1,45 @@
+[project]
+name = "point2pin"
+version = "0.1.0"
+description = "Convert Lat Lng To Indian Pincode"
+authors = [
+  {name = "Karthik Devan", email = "krtdvn@gmail.com"},
+]
+maintainers = [
+  {name = "Karthik Devan", email = "krtdvn@gmail.com"},
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "h3>=4.2.2",
+    "shapely>=2.1.0",
+]
+
+[dependency-groups]
+dev = [
+    "python-lsp-server>=1.12.2",
+]
+
+
+[project.urls]
+Homepage = "https://github.com/kdqed/point2pin"
+Issues = "https://github.com/kdqed/point2pin/issues"
+
+
+[build-system]
+requires = [
+    "setuptools>=60",
+    "setuptools-scm>=8.0"
+]
+build-backend = "setuptools.build_meta"
+
+
+[tool.setuptools]
+include-package-data = false
+
+
+[tool.setuptools.packages.find]
+include = ["point2pin*"]
+
+[tool.setuptools.package-data]
+"*" = ["*.*"]
