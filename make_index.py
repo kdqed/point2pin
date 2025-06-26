@@ -1,11 +1,12 @@
 import gzip
 import h3
-import os
 import json
+import os
+from pathlib import Path
 from shapely.geometry import shape
 
 H3_RES = 7
-DIR = os.path.join('point2pin', 'indexes')
+DIR = Path('point2pin') / 'indexes'
 
 os.makedirs(DIR, exist_ok=True)
 pincodeprops = {}
@@ -32,10 +33,10 @@ def geom_to_h3_cells(geometry):
     return interior_cells + list(border_cells)
 
 
-FEATURES_DIR = os.path.join('point2pin', 'features')
+FEATURES_DIR = Path('point2pin') / 'features'
 for pinfile in os.listdir(FEATURES_DIR):
     print(pinfile, end='\r'*30)
-    with gzip.open(os.path.join(FEATURES_DIR, pinfile), 'rt') as f:
+    with gzip.open(FEATURES_DIR / pinfile, 'rt') as f:
         feature = json.loads(f.read())
         pincodeprops[feature['properties']['Pincode']] = feature['properties']
         cells = geom_to_h3_cells(feature['geometry'])
@@ -53,10 +54,10 @@ for cell in h3_cells:
 
 print("Pins per cell:", pins_per_cell)
 
-with open(os.path.join(DIR, 'pincodeprops.json'), 'w') as f:
+with open(DIR / 'pincodeprops.json', 'w') as f:
     f.write(json.dumps(pincodeprops))
     f.close()
 
-with open(os.path.join(DIR, 'h3_cells.json'), 'w') as f:
+with open(DIR / 'h3_cells.json', 'w') as f:
     f.write(json.dumps(h3_cells))
     f.close()

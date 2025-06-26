@@ -1,6 +1,6 @@
 [project]
 name = "point2pin"
-version = "0.1.0"
+version = "0.1.1"
 description = "Convert Lat Lng To Indian Pincode"
 authors = [
   {name = "Karthik Devan", email = "krtdvn@gmail.com"},
